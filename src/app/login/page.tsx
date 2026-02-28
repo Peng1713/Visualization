@@ -9,8 +9,8 @@ import {
 } from "@ant-design/icons";
 import { css, keyframes } from "@emotion/css";
 import { Button, Card, Form, Input, Select, Space, Spin, Typography } from "antd";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useAppContext } from "@/contexts/app-context";
 
 const { Title, Text } = Typography;
@@ -65,10 +65,12 @@ interface LoginFormValues {
 export default function LoginPage() {
   const { hydrated, user, login } = useAppContext();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const redirectPath = useMemo(() => {
-    const raw = searchParams.get("redirect");
+  const resolveRedirectPath = () => {
+    if (typeof window === "undefined") {
+      return "/dashboard";
+    }
+    const raw = new URLSearchParams(window.location.search).get("redirect");
     if (!raw) {
       return "/dashboard";
     }
@@ -78,7 +80,7 @@ export default function LoginPage() {
     } catch {
       return "/dashboard";
     }
-  }, [searchParams]);
+  };
 
   useEffect(() => {
     if (hydrated && user) {
@@ -88,7 +90,7 @@ export default function LoginPage() {
 
   const handleSubmit = (values: LoginFormValues) => {
     login({ username: values.username.trim(), role: values.role });
-    router.replace(redirectPath);
+    router.replace(resolveRedirectPath());
   };
 
   if (!hydrated || user) {
