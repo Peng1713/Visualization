@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge, Card, Col, List, Row, Space, Tag, Typography } from "antd";
 import { PageHero } from "@/components/common/page-hero";
 
