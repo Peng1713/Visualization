@@ -140,7 +140,7 @@ export default function LoginPage() {
       />
 
       <Card className={cardClassName}>
-        <Space direction="vertical" size={12} style={{ width: "100%" }}>
+        <Space vertical size={12} style={{ width: "100%" }}>
           <div>
             <Space align="center">
               <ThunderboltOutlined style={{ color: "#69b1ff" }} />

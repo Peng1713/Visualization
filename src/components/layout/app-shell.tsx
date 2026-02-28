@@ -65,6 +65,9 @@ const logoClassName = css`
   font-weight: 700;
   background: linear-gradient(135deg, #1677ff, #13c2c2);
   box-shadow: 0 8px 20px rgba(23, 119, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const contentClassName = css`
@@ -205,10 +208,10 @@ export const AppShell = ({ children }: { children: ReactNode }) => {
             ) : null}
 
             <div className={brandClassName}>
-              <span className={logoClassName}>V</span>
+              <div className={logoClassName}>V</div>
               <div>
                 <Text strong>智析可视化平台</Text>
-                <Text type="secondary" style={{ fontSize: 12 }}>
+                <Text type="secondary" style={{ fontSize: 12, marginLeft: 10 }}>
                   高性能多端数据驾驶舱
                 </Text>
               </div>

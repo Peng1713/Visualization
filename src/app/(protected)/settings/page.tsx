@@ -25,9 +25,9 @@ export default function SettingsPage() {
         tags={["暗黑/明亮", "导航模式", "角色权限"]}
       />
 
-      <Space direction="vertical" size={12} style={{ width: "100%" }}>
+      <Space vertical size={12} style={{ width: "100%" }}>
         <Card title="外观设置">
-          <Space direction="vertical" size={16}>
+          <Space vertical size={16}>
             <div>
               <Text type="secondary">主题模式</Text>
               <br />

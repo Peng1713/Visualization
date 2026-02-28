@@ -24,7 +24,7 @@ export default function MonitorPage() {
       <Row gutter={[12, 12]}>
         <Col xs={24} lg={14}>
           <Card title="服务健康状态">
-            <Space direction="vertical" size={10} style={{ width: "100%" }}>
+            <Space vertical size={10} style={{ width: "100%" }}>
               {serviceRows.map((item) => (
                 <Card
                   key={item.name}
@@ -48,7 +48,7 @@ export default function MonitorPage() {
         </Col>
         <Col xs={24} lg={10}>
           <Card title="告警摘要">
-            <Space direction="vertical" size={8} style={{ width: "100%" }}>
+            <Space vertical size={8} style={{ width: "100%" }}>
               {[
                 "10:10 A1 区域网关延迟波动",
                 "09:42 B2 集群 CPU 峰值预警",

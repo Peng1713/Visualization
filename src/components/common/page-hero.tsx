@@ -18,10 +18,10 @@ export const PageHero = ({ title, description, tags = [] }: PageHeroProps) => (
       border: "1px solid rgba(138, 152, 177, 0.25)",
     }}
   >
-    <Title level={4} style={{ marginBottom: 6 }}>
-      {title}
-    </Title>
-    <Text type="secondary">{description}</Text>
+    <div style={{ marginBottom: 6 }}>
+      {title || "页面标题"}
+    </div>
+    <div>{description}</div>
     {tags.length > 0 && (
       <Space style={{ marginTop: 10 }} wrap>
         {tags.map((tag) => (
