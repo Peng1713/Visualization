@@ -96,7 +96,7 @@ export default function LoginPage() {
   if (!hydrated || user) {
     return (
       <div className={pageClassName}>
-        <Spin size="large" tip="加载中..." />
+        <Spin size="large" description="加载中..." />
       </div>
     );
   }
