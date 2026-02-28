@@ -1,0 +1,66 @@
+:root {
+  --app-bg: #f2f6ff;
+  --app-surface: rgba(255, 255, 255, 0.85);
+  --app-card-bg: #ffffff;
+  --app-text: #17233f;
+  --app-text-secondary: #5d6f90;
+}
+
+:root[data-theme="light"] {
+  --app-bg: #f2f6ff;
+  --app-surface: rgba(255, 255, 255, 0.86);
+  --app-card-bg: #ffffff;
+  --app-text: #17233f;
+  --app-text-secondary: #5d6f90;
+}
+
+:root[data-theme="dark"] {
+  --app-bg: #080f1f;
+  --app-surface: rgba(16, 27, 54, 0.8);
+  --app-card-bg: #111d3f;
+  --app-text: #e6ecff;
+  --app-text-secondary: #9fb0d9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--app-text);
+  background: var(--app-bg);
+  font-family: var(--font-geist-sans), "PingFang SC", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ant-layout {
+  background: var(--app-bg) !important;
+}
+
+.ant-card {
+  background: var(--app-card-bg);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(132, 151, 189, 0.5);
+  border-radius: 8px;
+}
