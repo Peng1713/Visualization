@@ -68,30 +68,44 @@ const safeParse = <T,>(rawValue: string | null): T | null => {
   }
 };
 
+const readInitialClientState = (): {
+  user: AuthUser | null;
+  preferences: AppPreferences;
+} => {
+  if (typeof window === "undefined") {
+    return {
+      user: null,
+      preferences: DEFAULT_PREFERENCES,
+    };
+  }
+
+  const storedUser = safeParse<AuthUser>(localStorage.getItem(STORAGE_USER_KEY));
+  const storedPreferences = safeParse<AppPreferences>(
+    localStorage.getItem(STORAGE_PREFS_KEY),
+  );
+
+  return {
+    user: storedUser,
+    preferences: {
+      themeMode: storedPreferences?.themeMode ?? DEFAULT_PREFERENCES.themeMode,
+      navigationMode:
+        storedPreferences?.navigationMode ?? DEFAULT_PREFERENCES.navigationMode,
+    },
+  };
+};
+
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
+  const initialClientState = useMemo(readInitialClientState, []);
   const [hydrated, setHydrated] = useState(false);
-  const [user, setUser] = useState<AuthUser | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(initialClientState.user);
   const [themeMode, setThemeMode] = useState<ThemeMode>(
-    DEFAULT_PREFERENCES.themeMode,
+    initialClientState.preferences.themeMode,
   );
   const [navigationMode, setNavigationMode] = useState<NavigationMode>(
-    DEFAULT_PREFERENCES.navigationMode,
+    initialClientState.preferences.navigationMode,
   );
 
   useEffect(() => {
-    const storedUser = safeParse<AuthUser>(localStorage.getItem(STORAGE_USER_KEY));
-    const storedPreferences = safeParse<AppPreferences>(
-      localStorage.getItem(STORAGE_PREFS_KEY),
-    );
-
-    if (storedUser) {
-      setUser(storedUser);
-    }
-
-    if (storedPreferences) {
-      setThemeMode(storedPreferences.themeMode);
-      setNavigationMode(storedPreferences.navigationMode);
-    }
     setHydrated(true);
   }, []);
 

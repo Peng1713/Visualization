@@ -2,7 +2,7 @@
 
 import { Spin } from "antd";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, type ReactNode } from "react";
 import { useAppContext } from "@/contexts/app-context";
 
 const FullPageLoading = () => (
@@ -23,7 +23,6 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [redirecting, setRedirecting] = useState(false);
 
   const currentPath = useMemo(() => {
     const queryString = searchParams.toString();
@@ -31,19 +30,13 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
   }, [pathname, searchParams]);
 
   useEffect(() => {
-    if (!hydrated) {
-      return;
-    }
-    if (!user) {
-      setRedirecting(true);
+    if (hydrated && !user) {
       const encodedPath = encodeURIComponent(currentPath);
       router.replace(`/login?redirect=${encodedPath}`);
-      return;
     }
-    setRedirecting(false);
   }, [currentPath, hydrated, router, user]);
 
-  if (!hydrated || !user || redirecting) {
+  if (!hydrated || !user) {
     return <FullPageLoading />;
   }
 
