@@ -1,8 +1,8 @@
 "use client";
 
 import { Spin } from "antd";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, type ReactNode } from "react";
 import { useAppContext } from "@/contexts/app-context";
 
 const FullPageLoading = () => (
@@ -22,19 +22,13 @@ export const AuthGuard = ({ children }: { children: ReactNode }) => {
   const { hydrated, user } = useAppContext();
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const currentPath = useMemo(() => {
-    const queryString = searchParams.toString();
-    return queryString ? `${pathname}?${queryString}` : pathname;
-  }, [pathname, searchParams]);
 
   useEffect(() => {
     if (hydrated && !user) {
-      const encodedPath = encodeURIComponent(currentPath);
+      const encodedPath = encodeURIComponent(pathname);
       router.replace(`/login?redirect=${encodedPath}`);
     }
-  }, [currentPath, hydrated, router, user]);
+  }, [hydrated, pathname, router, user]);
 
   if (!hydrated || !user) {
     return <FullPageLoading />;
