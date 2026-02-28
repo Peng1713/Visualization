@@ -7,6 +7,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import {
@@ -51,6 +52,7 @@ interface AppContextValue {
 }
 
 const AppContext = createContext<AppContextValue | null>(null);
+const subscribeNoop = () => () => {};
 
 const DEFAULT_PREFERENCES: AppPreferences = {
   themeMode: "dark",
@@ -96,7 +98,7 @@ const readInitialClientState = (): {
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const initialClientState = useMemo(() => readInitialClientState(), []);
-  const [hydrated, setHydrated] = useState(false);
+  const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const [user, setUser] = useState<AuthUser | null>(initialClientState.user);
   const [themeMode, setThemeMode] = useState<ThemeMode>(
     initialClientState.preferences.themeMode,
@@ -104,10 +106,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [navigationMode, setNavigationMode] = useState<NavigationMode>(
     initialClientState.preferences.navigationMode,
   );
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
 
   useEffect(() => {
     if (!hydrated) {
