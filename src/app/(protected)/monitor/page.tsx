@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Card, Col, List, Row, Space, Tag, Typography } from "antd";
+import { Badge, Card, Col, Row, Space, Tag, Typography } from "antd";
 import { PageHero } from "@/components/common/page-hero";
 
 const { Text } = Typography;
@@ -24,10 +24,14 @@ export default function MonitorPage() {
       <Row gutter={[12, 12]}>
         <Col xs={24} lg={14}>
           <Card title="服务健康状态">
-            <List
-              dataSource={serviceRows}
-              renderItem={(item) => (
-                <List.Item>
+            <Space direction="vertical" size={10} style={{ width: "100%" }}>
+              {serviceRows.map((item) => (
+                <Card
+                  key={item.name}
+                  size="small"
+                  styles={{ body: { padding: 12 } }}
+                  style={{ borderRadius: 12 }}
+                >
                   <Space style={{ width: "100%", justifyContent: "space-between" }}>
                     <Space>
                       <Badge status={item.status} />
@@ -37,21 +41,24 @@ export default function MonitorPage() {
                       {item.latency}
                     </Tag>
                   </Space>
-                </List.Item>
-              )}
-            />
+                </Card>
+              ))}
+            </Space>
           </Card>
         </Col>
         <Col xs={24} lg={10}>
           <Card title="告警摘要">
-            <List
-              dataSource={[
+            <Space direction="vertical" size={8} style={{ width: "100%" }}>
+              {[
                 "10:10 A1 区域网关延迟波动",
                 "09:42 B2 集群 CPU 峰值预警",
                 "09:15 D3 链路丢包轻微上升",
-              ]}
-              renderItem={(item) => <List.Item>{item}</List.Item>}
-            />
+              ].map((item) => (
+                <Card key={item} size="small" styles={{ body: { padding: 12 } }} style={{ borderRadius: 12 }}>
+                  <Text>{item}</Text>
+                </Card>
+              ))}
+            </Space>
           </Card>
         </Col>
       </Row>

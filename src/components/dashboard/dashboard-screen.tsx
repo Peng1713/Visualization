@@ -1,7 +1,7 @@
 "use client";
 
 import { css, keyframes } from "@emotion/css";
-import { Card, Col, List, Progress, Row, Space, Statistic, Tag, Typography } from "antd";
+import { Card, Col, Progress, Row, Space, Statistic, Tag, Typography } from "antd";
 import dynamic from "next/dynamic";
 import type { EChartsOption } from "echarts";
 import { useMemo } from "react";
@@ -46,6 +46,18 @@ const panelClassName = css`
 const metricCardClassName = css`
   border-radius: 12px;
   border: 1px solid rgba(138, 152, 177, 0.25);
+`;
+
+const alertListClassName = css`
+  display: grid;
+  gap: 10px;
+`;
+
+const alertItemClassName = css`
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 154, 210, 0.18);
+  background: rgba(255, 255, 255, 0.02);
 `;
 
 const alertRows = [
@@ -271,10 +283,9 @@ export const DashboardScreen = () => {
         </Col>
         <Col xs={24} xl={7}>
           <Card className={panelClassName} title="最新告警">
-            <List
-              dataSource={alertRows}
-              renderItem={(item) => (
-                <List.Item>
+            <div className={alertListClassName}>
+              {alertRows.map((item) => (
+                <div key={`${item.level}-${item.area}-${item.event}`} className={alertItemClassName}>
                   <Space vertical size={1}>
                     <Space>
                       <Tag color={item.color}>{item.level}</Tag>
@@ -282,9 +293,9 @@ export const DashboardScreen = () => {
                     </Space>
                     <Text type="secondary">{item.event}</Text>
                   </Space>
-                </List.Item>
-              )}
-            />
+                </div>
+              ))}
+            </div>
           </Card>
         </Col>
       </Row>
