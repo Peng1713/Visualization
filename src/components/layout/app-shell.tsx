@@ -278,7 +278,7 @@ export const AppShell = ({ children }: { children: ReactNode }) => {
         placement="left"
         onClose={() => setDrawerOpen(false)}
         open={drawerOpen}
-        width={260}
+        size={260}
       >
         <div style={{ marginBottom: 16 }}>
           <Text type="secondary" style={{ display: "block", marginBottom: 6 }}>

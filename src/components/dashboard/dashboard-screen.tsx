@@ -275,7 +275,7 @@ export const DashboardScreen = () => {
               dataSource={alertRows}
               renderItem={(item) => (
                 <List.Item>
-                  <Space direction="vertical" size={1}>
+                  <Space vertical size={1}>
                     <Space>
                       <Tag color={item.color}>{item.level}</Tag>
                       <Text strong>{item.area}</Text>
