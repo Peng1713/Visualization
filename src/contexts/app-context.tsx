@@ -95,7 +95,7 @@ const readInitialClientState = (): {
 };
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
-  const initialClientState = useMemo(readInitialClientState, []);
+  const initialClientState = useMemo(() => readInitialClientState(), []);
   const [hydrated, setHydrated] = useState(false);
   const [user, setUser] = useState<AuthUser | null>(initialClientState.user);
   const [themeMode, setThemeMode] = useState<ThemeMode>(
