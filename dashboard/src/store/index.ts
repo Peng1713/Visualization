@@ -26,11 +26,11 @@ export const useAppStore = create<AppState>()(
       userInfo: null,
       token: null,
 
-      setThemeMode: (mode) => set({ themeMode: mode }),
-      setLayoutMode: (mode) => set({ layoutMode: mode }),
-      setCollapsed: (collapsed) => set({ collapsed }),
-      setUserInfo: (info) => set({ userInfo: info }),
-      setToken: (token) => set({ token }),
+      setThemeMode: (mode: ThemeMode) => set({ themeMode: mode }),
+      setLayoutMode: (mode: LayoutMode) => set({ layoutMode: mode }),
+      setCollapsed: (collapsed: boolean) => set({ collapsed }),
+      setUserInfo: (info: UserInfo | null) => set({ userInfo: info }),
+      setToken: (token: string | null) => set({ token }),
       logout: () => set({ userInfo: null, token: null }),
     }),
     {

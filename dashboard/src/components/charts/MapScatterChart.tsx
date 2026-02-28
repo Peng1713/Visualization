@@ -4,19 +4,22 @@ import React, { useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useAppStore } from '@/store';
 
+const HOURS = Array.from({ length: 24 }, (_, i) => `${i}:00`);
+const DAYS = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
 export default function MapScatterChart() {
   const themeMode = useAppStore((s) => s.themeMode);
   const textColor = themeMode === 'dark' ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.6)';
 
-  const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
-  const days = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-
-  const heatData: [number, number, number][] = [];
-  for (let i = 0; i < 7; i++) {
-    for (let j = 0; j < 24; j++) {
-      heatData.push([j, i, Math.round(Math.random() * 100)]);
+  const heatData = useMemo(() => {
+    const data: [number, number, number][] = [];
+    for (let i = 0; i < 7; i++) {
+      for (let j = 0; j < 24; j++) {
+        data.push([j, i, ((i * 24 + j) * 17 + 13) % 101]);
+      }
     }
-  }
+    return data;
+  }, []);
 
   const option = useMemo(() => ({
     tooltip: {
@@ -24,12 +27,12 @@ export default function MapScatterChart() {
       backgroundColor: themeMode === 'dark' ? 'rgba(20,20,40,0.9)' : 'rgba(255,255,255,0.95)',
       borderColor: themeMode === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
       textStyle: { color: themeMode === 'dark' ? '#fff' : '#333' },
-      formatter: (p: { value: number[] }) => `${days[p.value[1]]} ${hours[p.value[0]]}<br/>访问量: ${p.value[2]}`,
+      formatter: (p: { value: number[] }) => `${DAYS[p.value[1]]} ${HOURS[p.value[0]]}<br/>访问量: ${p.value[2]}`,
     },
     grid: { top: 10, right: 10, bottom: 40, left: 50 },
     xAxis: {
       type: 'category',
-      data: hours,
+      data: HOURS,
       axisLabel: { color: textColor, fontSize: 10 },
       axisLine: { show: false },
       axisTick: { show: false },
@@ -37,7 +40,7 @@ export default function MapScatterChart() {
     },
     yAxis: {
       type: 'category',
-      data: days,
+      data: DAYS,
       axisLabel: { color: textColor, fontSize: 11 },
       axisLine: { show: false },
       axisTick: { show: false },
@@ -76,7 +79,7 @@ export default function MapScatterChart() {
         },
       },
     ],
-  }), [themeMode, textColor, heatData, hours, days]);
+  }), [themeMode, textColor, heatData]);
 
   return (
     <ReactECharts

@@ -24,16 +24,16 @@ const defaultData: BarRaceData[] = [
   { name: '南京', value: 7830 },
 ];
 
-const barColors = [
-  'linear-gradient(90deg, #1677ff, #00d4ff)',
-  'linear-gradient(90deg, #a855f7, #f093fb)',
-  'linear-gradient(90deg, #00ff88, #00d4ff)',
-  'linear-gradient(90deg, #ff6b35, #ffbe0b)',
-  'linear-gradient(90deg, #1677ff, #a855f7)',
-  'linear-gradient(90deg, #ff2d78, #ff6b35)',
-  'linear-gradient(90deg, #00d4ff, #00ff88)',
-  'linear-gradient(90deg, #ffbe0b, #ff6b35)',
-];
+// const barColors = [
+//   'linear-gradient(90deg, #1677ff, #00d4ff)',
+//   'linear-gradient(90deg, #a855f7, #f093fb)',
+//   'linear-gradient(90deg, #00ff88, #00d4ff)',
+//   'linear-gradient(90deg, #ff6b35, #ffbe0b)',
+//   'linear-gradient(90deg, #1677ff, #a855f7)',
+//   'linear-gradient(90deg, #ff2d78, #ff6b35)',
+//   'linear-gradient(90deg, #00d4ff, #00ff88)',
+//   'linear-gradient(90deg, #ffbe0b, #ff6b35)',
+// ];
 
 export default function BarRaceChart({ data = defaultData }: BarRaceChartProps) {
   const themeMode = useAppStore((s) => s.themeMode);

@@ -7,8 +7,6 @@ import {
   UserOutlined,
   ShoppingCartOutlined,
   RiseOutlined,
-  ThunderboltOutlined,
-  GlobalOutlined,
 } from '@ant-design/icons';
 import { useAppStore } from '@/store';
 import { useResponsive } from '@/hooks/useResponsive';
