@@ -1,6 +1,4 @@
-import { Card, Space, Tag, Typography } from "antd";
-
-const { Title, Text } = Typography;
+import { Card, Space, Tag } from "antd";
 
 interface PageHeroProps {
   title: string;
