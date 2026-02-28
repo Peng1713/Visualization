@@ -208,7 +208,6 @@ export const AppShell = ({ children }: { children: ReactNode }) => {
               <span className={logoClassName}>V</span>
               <div>
                 <Text strong>智析可视化平台</Text>
-                <br />
                 <Text type="secondary" style={{ fontSize: 12 }}>
                   高性能多端数据驾驶舱
                 </Text>
